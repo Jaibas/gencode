@@ -1,0 +1,7 @@
+app:
+  base_url: "http://localhost:8080"
+
+adfs:
+  ida_endpoint: "https://idadg2.jpmorganchase.com"
+  client_id: "PC-101888-SID-282931-DEV"
+  resource: "JPMC:URI:RS-101888-138317-LLMFinance-DEV"
