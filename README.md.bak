@@ -1,4 +1,4 @@
-#gencode - Generates pseudocode from a Low Level Design document using Large Language Model (OpenAI GPT-4) apis to process the uploaded file to summarise and generate pseudocode
+#gencode - Generates pseudocode from a Low Level Design document
 
 #Local setup
 

@@ -1,0 +1,68 @@
+import React, { useState } from 'react';
+import { TextField, Button, Box } from '@mui/material';
+
+const AuthForm = ({ isLogin, onSubmit }) => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    name: isLogin ? '' : ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formData);
+  };
+
+  return (
+    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+      {!isLogin && (
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          label="Name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+      )}
+      <TextField
+        margin="normal"
+        required
+        fullWidth
+        label="Email Address"
+        name="email"
+        type="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <TextField
+        margin="normal"
+        required
+        fullWidth
+        name="password"
+        label="Password"
+        type="password"
+        value={formData.password}
+        onChange={handleChange}
+      />
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+      >
+        {isLogin ? 'Sign In' : 'Sign Up'}
+      </Button>
+    </Box>
+  );
+};
+
+export default AuthForm;

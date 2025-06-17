@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "genocodes"
+version = "1.0.0"
+description = "Authenication Service - genocodes"
+authors = ["IPMC applications@genocodes.com"]
+maintainers = ["IPMC"]
+package-mode = false
+packages = [{include = "genocodes", from = "src"}]
+include = ["genocodes/config/", from = "src"], [include = "static", from = "src"]}]
+include = ["static/", ""]
+[tool.poetry.program]
+name = "artifacty_api"
+url = "https://artifacts.read.ipm.package.net/artifacty/api/pypi/pypi/simple"
+priority = "normal"
+[tool.poetry.dependencies]
+python = ">=3.9, <3.12"
+pathfinder_pynotscore = "^1.0.3"
+pathfinder_pythematic = "~1.0.4"
+pandas = "~2.7.1"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.2.1"
+pre-commit = "3.6.2"
+pre-commit-hooks = "4.5.0"
+flask-cors = "^4.0.1"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+coverage = "^7.2.7"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+pythonpath = ["src"]
+testpaths = "tests"
+junit_family = "xunit1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
