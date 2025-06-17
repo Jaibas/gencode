@@ -1,0 +1,50 @@
+import React, { useState, useEffect } from 'react';
+import { Box, Container } from '@mui/material';
+import FileUpload from '../components/FileUpload';
+import ChatInterface from '../components/ChatInterface';
+import UploadHistory from '../components/UploadHistory';
+import uploadService from '../services/upload';
+
+const Dashboard = () => {
+  const [uploads, setUploads] = useState([]);
+  const user = authService.getCurrentUser();
+
+  useEffect(() => {
+    if (user) {
+      fetchUploadHistory();
+    }
+  }, [user]);
+
+  const fetchUploadHistory = async () => {
+    try {
+      const history = await uploadService.getUploadHistory(user.token);
+      setUploads(history);
+    } catch (err) {
+      console.error('Failed to fetch upload history:', err);
+    }
+  };
+
+  const handleUpload = async (file, progressCallback) => {
+    try {
+      const response = await uploadService.uploadFile(file, user.token);
+      setUploads([response, ...uploads]);
+      return response;
+    } catch (err) {
+      throw new Error(err.response?.data?.message || 'Upload failed');
+    }
+  };
+
+  return (
+    <Container maxWidth="lg">
+      <Box sx={{ my: 4 }}>
+       <div style={{ height: '100vh' }}>
+      <ChatInterface />
+    </div>
+        <FileUpload onUpload={handleUpload} />
+        <UploadHistory uploads={uploads} />
+      </Box>
+    </Container>
+  );
+};
+
+export default Dashboard;

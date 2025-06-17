@@ -1,0 +1,51 @@
+import React, { useEffect, useState } from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Chip, Box } from '@mui/material';
+import { format } from 'date-fns';
+
+const UploadHistory = ({ uploads }) => {
+  const [sortedUploads, setSortedUploads] = useState([]);
+
+  useEffect(() => {
+    const sorted = [...uploads].sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt));
+    setSortedUploads(sorted);
+  }, [uploads]);
+
+  return (
+    <Box sx={{ mt: 4 }}>
+      <Typography variant="h6" gutterBottom>
+        Upload History
+      </Typography>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>File Name</TableCell>
+              <TableCell>Status</TableCell>
+              <TableCell>Uploaded By</TableCell>
+              <TableCell>Upload Time</TableCell>
+              <TableCell>Size</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sortedUploads.map((upload) => (
+              <TableRow key={upload._id}>
+                <TableCell>{upload.fileName}</TableCell>
+                <TableCell>
+                  <Chip
+                    label={upload.status}
+                    color={upload.status === 'success' ? 'success' : 'error'}
+                  />
+                </TableCell>
+                <TableCell>{upload.uploadedBy.name}</TableCell>
+                <TableCell>{format(new Date(upload.uploadedAt), 'PPpp')}</TableCell>
+                <TableCell>{(upload.size / 1024).toFixed(2)} KB</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
+  );
+};
+
+export default UploadHistory;
