@@ -25,3 +25,13 @@ Install below
 - npm install (first time)
 - npm start
 - localhost:3000
+
+
+# Individial skillset
+# python flask fastapi
+
+#java springboot
+
+#React Angular Javascript
+
+#Oracle, MySQL
