@@ -29,7 +29,7 @@ Install below
 
 # Individial skillset
 
-# python flask fastapi
+#python flask fastapi
 
 #java springboot
 
